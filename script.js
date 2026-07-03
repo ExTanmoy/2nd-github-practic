@@ -1,5 +1,4 @@
-<script>
-    // 1. Wait for the webpage layout to fully load
+// 1. Wait for the webpage layout to fully load
     document.addEventListener("DOMContentLoaded", function() {
         
         // 2. Select your modification paragraphs using their text content
@@ -24,4 +23,3 @@
         // 3. Log a little achievement message to your browser console (F12 inspect)
         console.log(`✨ GitHub Practice Page Loaded! Found ${editCount} manual edits tracked.`);
     });
-</script>
