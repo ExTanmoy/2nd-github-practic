@@ -1,25 +1,34 @@
 // 1. Wait for the webpage layout to fully load
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // 2. Select the elements we added in the HTML
+    const trackingParagraphs = document.querySelectorAll(".tracked-edit");
+    const statusBar = document.getElementById("status-bar");
+    let editCount = 0;
+
+    trackingParagraphs.forEach((p, index) => {
+        editCount++;
         
-        // 2. Select your modification paragraphs using their text content
-        const paragraphs = document.querySelectorAll("p");
-        let editCount = 0;
-
-        paragraphs.forEach(p => {
-            // Check if the paragraph text contains our tracking words
-            if (p.textContent.toLowerCase().includes("modify") || p.textContent.toLowerCase().includes("again")) {
-                editCount++;
-                
-                // Add a little interaction: flash when clicked!
-                p.style.cursor = "pointer";
-                p.addEventListener("click", function() {
-                    this.style.backgroundColor = "#bfffbf"; // Turns green momentarily
-                    alert(`You clicked edit trace #${editCount}: "${this.textContent}"`);
-                    this.style.backgroundColor = "#fff3cd"; // Resets to CSS yellow
-                });
-            }
+        // Add interaction: flash when clicked!
+        p.style.cursor = "pointer";
+        p.title = "Click me!";
+        
+        p.addEventListener("click", function() {
+            this.style.backgroundColor = "#bfffbf"; // Turns green momentarily
+            alert(`You clicked edit trace #${index + 1}: "${this.textContent}"`);
+            
+            // Automatically reset the background color after a short delay
+            setTimeout(() => {
+                this.style.backgroundColor = ""; 
+            }, 500);
         });
-
-        // 3. Log a little achievement message to your browser console (F12 inspect)
-        console.log(`✨ GitHub Practice Page Loaded! Found ${editCount} manual edits tracked.`);
     });
+
+    // 3. Update the UI status bar to prove JS is working
+    if (statusBar) {
+        statusBar.textContent = `✨ JS is active! Found ${editCount} manual edits. Click the yellow boxes below!`;
+    }
+
+    // 4. Log a little achievement message to browser console (F12 inspect)
+    console.log(`✨ GitHub Practice Page Loaded! Found ${editCount} manual edits tracked.`);
+});
